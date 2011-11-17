@@ -11,7 +11,7 @@ function stripeResponseHandler(status, response) {
         $('#credit-card #expiry-year').removeAttr("disabled");
 
         /* Show the errors on the form */
-        $("#error").html(response.error.message);
+        $("#error").html(response.error.message + ".");
         $("#error").show();
     } else {
         var payment_form = $("#payment-form");
@@ -33,6 +33,24 @@ function stripeResponseHandler(status, response) {
 $(document).ready(function() {
     $("#payment-form").submit(function(event) {
 
+        /* Make sure there's no input missing. */
+        if ($('#user_name').val() == '' ||
+            $('#user-email').val() == '' ||
+            $('#user-password').val() == '' ||
+            $('#user-password-confirmation').val() == '' ||
+            $('#credit-card #number').val() == '' ||
+            $('#credit-card #cvv').val() == '') {
+          $('#error').html('Please enter all required fields.');
+          $('#error').show();
+          return false;
+        }
+
+        /* Do passwords match? */
+        if ($('#user-password').val() != $('#user-password-confirmation').val()) {
+          $('#error').html('Passwords do not match.');
+          $('#error').show();
+          return false;
+        }
         /* Disable the submit button to prevent repeated clicks. */
         $('#submit-button').attr("disabled", "disabled");
         $('#credit-card #number').attr("disabled", "disabled");

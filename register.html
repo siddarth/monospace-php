@@ -35,7 +35,7 @@
     <div class="topbar">
       <div class="fill">
         <div class="container">
-          <a class="brand" href="#">Monospace PHP</a>
+          <a class="brand" href="#">Monospace</a>
           <ul class="nav">
               <li><a href="index.html">Home</a></li>
               <li><a class="active" href="register.html">Register</a></li>
@@ -56,34 +56,34 @@
       <div id="success" style="display:none;" class="alert-message success"></div>
       <div class="content">
         <div class="page-header">
-          <h1>Page name <small>Supporting text or tagline</small></h1>
+          <h1>Register <small>Monospace costs only $10</small></h1>
         </div>
         <div class="row">
           <div class="span10">
               <form accept-charset="UTF-8" action="register2.php" class="form-stacked" id="payment-form" method="post">
                   <div style="margin:0;padding:0;display:inline"></div>
                   <div class='clearfix'>
-                      <label for="user_name">Name</label>
+                      <label for="user_name">Name *</label>
                       <div class='input'>
-                          <input class="field" id="user_name" name="name" size="30" type="text" />
+                          <input class="field" id="user-name" name="name" size="30" type="text" />
                       </div>
                   </div>
                   <div class='clearfix'>
-                      <label for="user_email">Email</label>
+                      <label for="user_email">Email *</label>
                       <div class='input'>
-                          <input class="field" id="user_email" name="email" size="30" type="text" />
+                          <input class="field" id="user-email" name="email" size="30" type="text" />
                       </div>
                   </div>
                   <div class='clearfix'>
-                      <label for="user_password">Password</label>
+                      <label for="user_password">Password *</label>
                       <div class='input'>
-                          <input class="field" id="user_password" name="password" size="30" type="password" />
+                          <input class="field" id="user-password" name="password" size="30" type="password" />
                       </div>
                   </div>
                   <div class='clearfix'>
-                      <label for="user_password_confirmation">Password confirmation</label>
+                      <label for="user_password_confirmation">Password confirmation *</label>
                       <div class='input'>
-                          <input class="field" id="user_password_confirmation" name="user[password_confirmation]" size="30" type="password" />
+                          <input class="field" id="user-password-confirmation" name="password_confirmation" size="30" type="password" />
                       </div>
                   </div>
                   <noscript>
@@ -95,19 +95,19 @@
                   <div id='credit-card' style='display:block'>
                       <!-- these fields are disabled before submission and are never transmitted back to rails -->
                       <div class='clearfix'>
-                          <label for="number">Credit card number</label>
+                          <label for="number">Credit card number *</label>
                           <div class='input'>
                               <input class="field" id="number" name="credit_card_number" type="text" />
                           </div>
                       </div>
                       <div class='clearfix'>
-                          <label for="cvv">Security code (CVV)</label>
+                          <label for="cvv">Security code (CVV) *</label>
                           <div class='input'>
                               <input class="small" id="cvv" name="cvv" type="text" />
                           </div>
                       </div>
                       <div class='clearfix'>
-                          <label for="expiry_date">Expiry date</label>
+                          <label for="expiry_date">Expiry date *</label>
                           <div class='input'>
                               <select class="small" id="expiry-month" name="expiry-month">
                                   <option value="1">1</option>
@@ -155,6 +155,12 @@
                           </div>
                           <!-- empty -->
                       </div>
+                      <div class='clearfix'>
+                        <label for='is-recurring'>Auto-recharge?</label>
+                        <div class='input'>
+                          <input type='checkbox' name='is-recurring' id='is-recurring' value='is-recurring' />
+                        </div>
+                      </div>
                       <span class='help-block'>
                           Your credit card details will be sent directly to our payment processor
                       </span>
@@ -167,6 +173,7 @@
           </div>
           <div class="span4">
             <p>This is a test form, and will not charge your card. To test, feel free to enter 4242424242424242 (a <a href="http://en.wikipedia.org/wiki/Luhn_algorithm">valid</a> credit number).</p>
+            <p>Monospace costs $10 a month. If you check the "Auto-recharge?" box, you'll automatically be billed every month until you choose to cancel the subscription.</p>
           </div>
         </div>
       </div>
