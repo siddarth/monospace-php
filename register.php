@@ -1,3 +1,24 @@
+<?php
+
+  include('user.php');
+  $paymentIsSuccessful = False;
+  $error = False;
+  if ($_POST) {
+    /**
+     * TODO: Sanitiiiizeeeee.
+     */
+    $user = new User($_POST['name'], $_POST['email'], $_POST['password'], $_POST['stripeToken'], False);
+    try {
+      $user->charge();
+      $paymentIsSuccessful = True;
+    }
+    catch (Exception $e) {
+      $error = "Error: ".$e->getMessage().": token = ".$_POST['stripeToken'];
+    }
+  }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,13 +41,6 @@
     <script src="js/jquery.min.js" type="text/javascript"></script>
     <script src="js/jquery_ujs.js" type="text/javascript"></script>
     <script src="js/application.js" type="text/javascript"></script>
-
-    <!-- Le Stripe publishable key -->
-    <script type="text/javascript">
-    //<![CDATA[
-    Stripe.publishableKey = 'pk_dl4LcpeAxUEPHN3FxzuAQQmhCGmx5';
-    //]]>
-    </script>
 
   </head>
 
@@ -52,15 +66,23 @@
 
 
     <div class="container">
-      <div id="error" style="display:none;" class="alert-message error"></div>
-      <div id="success" style="display:none;" class="alert-message success"></div>
+<?php
+    if ($paymentIsSuccessful == True)
+        echo '<div id="success" class="alert-message success">Payment successful. Log in above.</div>';
+    elseif ($error != False)
+      echo "<div id=\"error\" class=\"alert-message error\">$error</div>";
+    else {
+      echo '<div id="error" style="display:none;" class="alert-message error"></div>';
+      echo '<div id="success" style="display:none;" class="alert-message success"></div>';
+    }
+?>
       <div class="content">
         <div class="page-header">
           <h1>Register <small>Monospace costs only $10</small></h1>
         </div>
         <div class="row">
           <div class="span10">
-              <form accept-charset="UTF-8" action="register2.php" class="form-stacked" id="payment-form" method="post">
+              <form accept-charset="UTF-8" action="register.php" class="form-stacked" id="payment-form" method="post">
                   <div style="margin:0;padding:0;display:inline"></div>
                   <div class='clearfix'>
                       <label for="user_name">Name *</label>
