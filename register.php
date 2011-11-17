@@ -16,56 +16,14 @@
       $error = "Error: ".$e->getMessage().": token = ".$_POST['stripeToken'];
     }
   }
-
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
+<?php
+  include 'layout.php';
+  $header = get_header('Register');
+  echo $header;
+?>
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- Le styles -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
-
-    <!-- Le Javascript -->
-    <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
-    <script src="js/jquery.min.js" type="text/javascript"></script>
-    <script src="js/jquery_ujs.js" type="text/javascript"></script>
-    <script src="js/application.js" type="text/javascript"></script>
-
-  </head>
-
-  <body>
-
-    <div class="topbar">
-      <div class="fill">
-        <div class="container">
-          <a class="brand" href="#">Monospace</a>
-          <ul class="nav">
-              <li><a href="index.html">Home</a></li>
-              <li><a class="active" href="register.html">Register</a></li>
-              <li><a href="about.html">About</a></li>
-          </ul>
-          <form action="" class="pull-right">
-            <input class="input-small" type="text" placeholder="Username">
-            <input class="input-small" type="password" placeholder="Password">
-            <button class="btn" type="submit">Sign in</button>
-          </form>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="container">
 <?php
     if ($paymentIsSuccessful == True)
         echo '<div id="success" class="alert-message success">Payment successful. Log in above.</div>';
@@ -200,11 +158,7 @@
         </div>
       </div>
 
-      <footer>
-        <p>&copy; Company 2011</p>
-      </footer>
-
-    </div> <!-- /container -->
-
-  </body>
-</html>
+<?php
+  $footer = get_footer();
+  echo $footer;
+?>
