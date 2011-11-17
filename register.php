@@ -152,8 +152,8 @@
 
           </div>
           <div class="span4">
-            <p>This is a test form, and will not charge your card. To test, feel free to enter 4242424242424242 (a <a href="http://en.wikipedia.org/wiki/Luhn_algorithm">valid</a> credit number).</p>
             <p>Monospace costs $10 a month. If you check the "Auto-recharge?" box, you'll automatically be billed every month until you choose to cancel the subscription.</p>
+            <p>This is a test form, and will not charge your card. To test, feel free to enter 4242424242424242 (a <a href="http://en.wikipedia.org/wiki/Luhn_algorithm">valid</a> credit number).</p>
           </div>
         </div>
       </div>
