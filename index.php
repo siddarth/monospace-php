@@ -46,14 +46,26 @@
 
       <div class="content">
         <div class="page-header">
-          <h1>Page name <small>Supporting text or tagline</small></h1>
+          <h1>Monospace <small>A social network for developers</small></h1>
         </div>
         <div class="row">
           <div class="span10">
-            <h2>Main content</h2>
+            <?php
+              if ($_SESSION["authenticated"] == true) {
+            ?>
+            <p>Welcome to Monospace. Shouldn't you be writing code?</p>
+
+            <?php
+              }
+              else {
+            ?>
+              <p>You don't appear to be logged in. Log in to Monospace above!</p>
+            <?php
+              }
+            ?>
           </div>
           <div class="span4">
-            <h3>Secondary content</h3>
+            <p>Monospace is a social network for developers. It's our sample PHP application, showing how to use Stripe to charge subscribers. Find out more about Monospace <a href="about.html">here</a>.</p>
           </div>
         </div>
       </div>
