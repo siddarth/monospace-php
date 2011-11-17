@@ -41,6 +41,12 @@ function get_header($route)
       <link href="css/bootstrap.css" rel="stylesheet">
       <link href="css/styles.css" rel="stylesheet">
 
+      <!-- Le Javascript -->
+      <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
+      <script src="js/jquery.min.js" type="text/javascript"></script>
+      <script src="js/jquery_ujs.js" type="text/javascript"></script>
+      <script src="js/application.js" type="text/javascript"></script>
+
       <!-- Le fav and touch icons -->
       <link rel="shortcut icon" href="images/favicon.ico">
       <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
