@@ -9,11 +9,11 @@ function get_nav_bar($route) {
   $routes = array("Home" => "index.php", "Register" => "register.php", "About" => "about.php");
   foreach ($routes as $r => $href) {
     if ($route == $r)
-      $nav .= "      <li class=\"active\"><a href=\"$href\">$r</a></li>";
+      $nav .= "\t\t<li class=\"active\"><a href=\"$href\">$r</a></li>\n";
     else
-      $nav .= "      <li><a href=\"$href\">$r</a></li>";
+      $nav .= "\t\t<li><a href=\"$href\">$r</a></li>\n";
   }
-  $nav .= "</ul>";
+  $nav .= "\t    </ul>";
   return $nav;
 }
 
