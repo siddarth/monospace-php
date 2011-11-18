@@ -11,9 +11,9 @@
         <div class="row">
           <div class="span10">
             <?php
-              if ($_SESSION["authenticated"] == true) {
+              if ($_SESSION["authenticated"]) {
             ?>
-            <p>Welcome to Monospace. Shouldn't you be writing code?</p>
+            <p>Welcome to Monospace, <? echo $_SESSION["user"]["name"] ?>. Shouldn't you be writing code?</p>
 
             <?php
               }

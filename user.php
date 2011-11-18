@@ -2,8 +2,10 @@
 
 include 'stripe/Stripe.php';
 include 'constants.php';
+include 'db.php';
 
 Stripe::setApiKey(STRIPE_API_KEY);
+db_connect();
 
 class User {
 
@@ -24,8 +26,45 @@ class User {
     $this->stripeToken = $_stripeToken;
   }
 
+  static function authenticate($user, $passwd) {
+    if (($user == "") || ($passwd == ""))
+      throw new Exception("Enter both the username and password.");
+
+    $query = sprintf("SELECT * FROM stripe WHERE email='%s' AND password='%s'",
+                     mysql_real_escape_string($user),
+                     mysql_real_escape_string($passwd));
+    $result = mysql_query($query);
+    if (!$result)
+      throw new Exception("Error: ".mysql_error());
+    if (mysql_num_rows($result) == 1) {
+      $row = mysql_fetch_array($result);
+      $_SESSION['user'] = $row;
+      $_SESSION['authenticated'] = True;
+    }
+    else {
+      throw new Exception("Invalid credentials");
+    }
+  }
+
   function store() {
-    // TODO: implement this.
+
+    $query = sprintf("SELECT * FROM stripe WHERE email='%s'", mysql_real_escape_string($this->email));
+    $result = mysql_query($query);
+    if (!$result) {
+      throw new Exception(mysql_error());
+    }
+    if (mysql_num_rows($result) != 0)
+      throw new Exception("User with email ".$this->email." already exists.");
+
+    $query = sprintf("INSERT INTO stripe (name, email, password, stripeToken, isRecurring) VALUES ('%s', '%s', '%s', '%s', %d)",
+                     mysql_real_escape_string($this->name),
+                     mysql_real_escape_string($this->email),
+                     mysql_real_escape_string($this->password),
+                     mysql_real_escape_string($this->stripeToken),
+                     $this->isRecurring);
+    mysql_query($query);
+
+    return true;
   }
 
   /**

@@ -1,39 +1,45 @@
 <?php
-
-  include('user.php');
-  $paymentIsSuccessful = False;
-  $error = False;
-  if ($_POST) {
-    /**
-     * TODO: Sanitiiiizeeeee.
-     */
-    $user = new User($_POST['name'], $_POST['email'], $_POST['password'], $_POST['stripeToken'], False);
-    try {
-      $user->charge();
-      $paymentIsSuccessful = True;
-    }
-    catch (Exception $e) {
-      $error = "Error: ".$e->getMessage().": token = ".$_POST['stripeToken'];
-    }
-  }
-?>
-
-<?php
   include 'layout.php';
+  session_start();
+  if ($_SESSION["authenticated"])
+    header('Location: index.php');
+
   $header = get_header('Register');
   echo $header;
 ?>
 
 <?php
-    if ($paymentIsSuccessful == True)
-        echo '<div id="success" class="alert-message success">Payment successful. Log in above.</div>';
-    elseif ($error != False)
-      echo "<div id=\"error\" class=\"alert-message error\">$error</div>";
-    else {
-      echo '<div id="error" style="display:none;" class="alert-message error"></div>';
-      echo '<div id="success" style="display:none;" class="alert-message success"></div>';
+
+  include('user.php');
+  include('db.php');
+
+  $paymentIsSuccessful = False;
+  $error = False;
+
+  if ($_POST) {
+
+    /* Is this a recurring billing? */
+    $isRecurring = 0;
+    if (isset($_POST['is-recurring']))
+      $isRecurring = 1;
+
+    /* Instantiate a User object, store the user in the DB, and charge the card. */
+    $user = new User($_POST['name'], $_POST['email'], $_POST['password'], $_POST['stripeToken'], $isRecurring);
+    try {
+      $user->store();
+      $user->charge();
+      $paymentIsSuccessful = True;
     }
+    catch (Exception $e) {
+      $error = "Error: ".$e->getMessage();
+    }
+  }
 ?>
+
+<?php
+    publishSuccessOrError($paymentIsSuccessful, $error);
+?>
+
       <div class="content">
         <div class="page-header">
           <h1>Register <small>Monospace costs only $10</small></h1>

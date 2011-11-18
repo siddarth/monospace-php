@@ -4,25 +4,43 @@
  * Returns a navigation bar using the routes defined above.
  * Deals correctly with active tab.
  */
-function get_nav_bar($route) {
+function getNavBar($route) {
   $nav = "<ul class=\"nav\">\n";
-  $routes = array("Home" => "index.php", "Register" => "register.php", "About" => "about.php");
+  $routes = array();
+  if (!$_SESSION["authenticated"])
+    $routes = array("Home" => "index.php", "Register" => "register.php", "About" => "about.php", "Sign in" => "login.php");
+  else
+    $routes = array("Home" => "index.php", "About" => "about.php", "Sign out" => "logout.php");
   foreach ($routes as $r => $href) {
     if ($route == $r)
       $nav .= "\t\t<li class=\"active\"><a href=\"$href\">$r</a></li>\n";
     else
       $nav .= "\t\t<li><a href=\"$href\">$r</a></li>\n";
   }
-  $nav .= "\t    </ul>";
   return $nav;
 }
 
+function publishSuccessOrError($isSuccess, $error) {
+  if ($isSuccess == True) {
+    echo '<div id="success" class="alert-message success">Payment successful. Log in above.</div>';
+    echo '<div id="error" style="display:none;" class="alert-message error"></div>';
+  }
+  elseif ($error != False) {
+    echo "<div id=\"error\" class=\"alert-message error\">$error</div>";
+    echo '<div id="success" style="display:none;" class="alert-message success"></div>';
+  }
+  else {
+    echo '<div id="error" style="display:none;" class="alert-message error"></div>';
+    echo '<div id="success" style="display:none;" class="alert-message success"></div>';
+  }
+}
 /**
  * Gets header for given route.
  */
 function get_header($route)
 {
-  $nav = get_nav_bar($route);
+  session_start();
+  $nav = getNavBar($route);
   $header = <<<EOF
   <!DOCTYPE html>
   <html lang="en">
@@ -61,12 +79,7 @@ function get_header($route)
           <div class="container">
             <a class="brand" href="index.php">Monospace</a>
             $nav
-            <form action="" class="pull-right">
-              <input class="input-small" type="text" placeholder="Username">
-              <input class="input-small" type="password" placeholder="Password">
-              <button class="btn" type="submit">Sign in</button>
-            </form>
-          </div>
+            </div>
         </div>
       </div>
 
