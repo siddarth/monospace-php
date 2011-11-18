@@ -1,6 +1,6 @@
 <?php
   require_once('lib/inc/layout.inc.php');
-  require_once('lib/inc/db.inc.php');
+  require_once('lib/db.php');
   require_once('lib/user.php');
 
   session_start();

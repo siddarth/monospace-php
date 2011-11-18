@@ -1,0 +1,7 @@
+- Hash passwords.
+- Ensure sanitization things.
+- Factor out JS key into constants.
+- Separate DB class?
+- Clean up the User class.
+
+- Review/Refactor.

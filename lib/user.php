@@ -2,10 +2,10 @@
 
 require_once 'stripe/Stripe.php';
 require_once 'inc/constants.inc.php';
-require_once 'inc/db.inc.php';
+require_once 'db.php';
 
 Stripe::setApiKey(STRIPE_API_KEY);
-db_connect();
+Db::db_connect();
 
 class User {
 
