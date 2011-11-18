@@ -1,5 +1,5 @@
 <?php
-  include 'layout.php';
+  require_once('lib/inc/layout.inc.php');
   $header = get_header('About');
   echo $header;
 ?>
@@ -10,7 +10,7 @@
         </div>
         <div class="row">
           <div class="span10">
-            <p>Monospace PHP was written for <a href="https://stripe.com">Stripe</a>, by <a href="http://siddarthc.com">Siddarth Chandrasekaran</a>. Monospace is a social network for developers. It's our sample PHP application, showing how to use Stripe to charge subscribers.</p>
+            <p>Monospace is a social network for developers. It's a sample PHP application, showing how to use <a href="http://stripe.com/">Stripe</a> to charge subscribers.</p>
 
             <p>Monospace uses the Stripe Javascript bindings to validate a credit card, and the Stripe PHP bindings to create a customer and add the credit card to that customer. Customers can also update their credit card.<p>
 

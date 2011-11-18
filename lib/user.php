@@ -1,8 +1,8 @@
 <?php
 
-include 'stripe/Stripe.php';
-include 'constants.php';
-include 'db.php';
+require_once 'stripe/Stripe.php';
+require_once 'inc/constants.inc.php';
+require_once 'inc/db.inc.php';
 
 Stripe::setApiKey(STRIPE_API_KEY);
 db_connect();

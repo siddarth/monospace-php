@@ -1,17 +1,15 @@
 <?php
-  include 'layout.php';
+  require_once('lib/inc/layout.inc.php');
+  require_once('lib/inc/db.inc.php');
+  require_once('lib/user.php');
+
   session_start();
+
   if ($_SESSION["authenticated"])
     header('Location: index.php');
 
   $header = get_header('Register');
   echo $header;
-?>
-
-<?php
-
-  include('user.php');
-  include('db.php');
 
   $paymentIsSuccessful = False;
   $error = False;
@@ -34,9 +32,7 @@
       $error = "Error: ".$e->getMessage();
     }
   }
-?>
 
-<?php
     publishSuccessOrError($paymentIsSuccessful, $error);
 ?>
 

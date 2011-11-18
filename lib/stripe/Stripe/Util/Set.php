@@ -11,7 +11,7 @@ class Stripe_Util_Set
       $this->_elts[$item] = true;
   }
 
-  public function includes($elt)
+  public function require_onces($elt)
   {
     return isset($this->_elts[$elt]);
   }

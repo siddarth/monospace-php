@@ -1,5 +1,5 @@
 <?php
-  include 'layout.php';
+  require_once('lib/inc/layout.inc.php');
   $header = get_header('Home');
   echo $header;
 ?>

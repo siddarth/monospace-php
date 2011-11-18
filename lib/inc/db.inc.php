@@ -1,6 +1,6 @@
 <?php
 
-  include 'constants.php';
+  require_once('constants.inc.php');
 
   function db_connect() {
     $con = mysql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD);

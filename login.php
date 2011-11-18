@@ -1,6 +1,6 @@
 <?php
-  include 'layout.php';
-  include('user.php');
+  require_once('lib/inc/layout.inc.php');
+  require_once('lib/user.php');
 
   session_start();
 
@@ -18,10 +18,7 @@
 
   $header = get_header('Sign in');
   echo $header;
-?>
 
-
-<?php
   publishSuccessOrError($success, $error);
 ?>
       <div class="content">

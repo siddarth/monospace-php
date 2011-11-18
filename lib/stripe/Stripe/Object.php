@@ -31,7 +31,7 @@ class Stripe_Object implements ArrayAccess
   {
     // TODO: may want to clear from $_transientValues.  (Won't be user-visible.)
     $this->_values[$k] = $v;
-    if (!self::$_ignoredAttributes->includes($k))
+    if (!self::$_ignoredAttributes->require_onces($k))
       $this->_unsavedValues->add($k);
   }
   public function __isset($k)
@@ -48,7 +48,7 @@ class Stripe_Object implements ArrayAccess
   {
     if (isset($this->_values[$k])) {
       return $this->_values[$k];
-    } else if ($this->_transientValues->includes($k)) {
+    } else if ($this->_transientValues->require_onces($k)) {
       $class = get_class($this);
       $attrs = join(', ', array_keys($this->_values));
       error_log("Stripe Notice: Undefined property of $class instance: $k.  HINT: The $k attribute was set in the past, however.  It was then wiped when refreshing the object with the result returned by Stripe's API, probably as a result of a save().  The attributes currently available on this object are: $attrs");
@@ -105,13 +105,13 @@ class Stripe_Object implements ArrayAccess
       $removed = array_diff(array_keys($this->_values), array_keys($values));
 
     foreach ($removed as $k) {
-      if (self::$_permanentAttributes->includes($k))
+      if (self::$_permanentAttributes->require_onces($k))
         continue;
       unset($this->$k);
     }
 
     foreach ($values as $k => $v) {
-      if (self::$_permanentAttributes->includes($k))
+      if (self::$_permanentAttributes->require_onces($k))
         continue;
       $this->_values[$k] = Stripe_Util::convertToStripeObject($v, $apiKey);
       $this->_transientValues->discard($k);
@@ -140,7 +140,7 @@ class Stripe_Object implements ArrayAccess
     $values = Stripe_Util::arrayClone($this->_values);
     ksort($values);
     foreach ($values as $k => $v) {
-      if (self::$_ignoredAttributes->includes($k))
+      if (self::$_ignoredAttributes->require_onces($k))
 	continue;
       $v = $this->$k;
       if ($v instanceof Stripe_Object)
@@ -149,7 +149,7 @@ class Stripe_Object implements ArrayAccess
 	$v = $v ? 'true' : 'false';
       else
 	$v = "$v";
-      if ($this->_unsavedValues->includes($k))
+      if ($this->_unsavedValues->require_onces($k))
 	array_push($valuesStr, "$k=$v (unsaved)");
       else
 	array_push($valuesStr, "$k=$v");
