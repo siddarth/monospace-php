@@ -1,7 +1,6 @@
 <?php
   require_once('lib/inc/layout.inc.php');
-  $header = get_header('Home');
-  echo $header;
+  echo get_header('Home');
 ?>
 
       <div class="content">
@@ -25,12 +24,11 @@
             ?>
           </div>
           <div class="span4">
-            <p>Monospace is a social network for developers. It's our sample PHP application, showing how to use Stripe to charge subscribers. Find out more about Monospace <a href="about.html">here</a>.</p>
+            <p>Monospace is a social network for developers. It's our sample PHP application, showing how to use Stripe to charge subscribers. Find out more about Monospace <a href="about.php">here</a>.</p>
           </div>
         </div>
       </div>
 
 <?php
-  $footer = get_footer();
-  echo $footer;
+  echo get_footer();
 ?>

@@ -16,8 +16,7 @@
     }
   }
 
-  $header = get_header('Sign in');
-  echo $header;
+  echo get_header('Sign in');
 
   publishSuccessOrError($success, $error);
 ?>
@@ -54,6 +53,5 @@
       </div>
 
 <?php
-  $footer = get_footer();
-  echo $footer;
+  echo get_footer();
 ?>

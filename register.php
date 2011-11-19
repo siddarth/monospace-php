@@ -8,8 +8,7 @@
   if ($_SESSION["authenticated"])
     header('Location: index.php');
 
-  $header = get_header('Register');
-  echo $header;
+  echo get_header('Register');
 
   $paymentIsSuccessful = False;
   $error = False;
@@ -138,6 +137,5 @@
       </div>
 
 <?php
-  $footer = get_footer();
-  echo $footer;
+  echo get_footer();
 ?>

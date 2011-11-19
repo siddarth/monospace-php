@@ -1,7 +1,6 @@
 <?php
   require_once('lib/inc/layout.inc.php');
-  $header = get_header('About');
-  echo $header;
+  echo get_header('About');
 ?>
 
       <div class="content">
@@ -23,6 +22,5 @@
       </div>
 
 <?php
-  $footer = get_footer();
-  echo $footer;
+  echo get_footer();
 ?>
